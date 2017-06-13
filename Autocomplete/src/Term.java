@@ -56,13 +56,14 @@ public class Term implements Comparable<Term> {
     }
 
     public static void main(String[] args) {
-        Term t = new Term("Molly", 5);
-        Term u = new Term("David", 3);
-        Term v = new Term("Elisa", 9);
-        
-        Term[] a = {t, u, v};
-        Insertion.sort(a, byPrefixOrder(3));
-        for(int i = 0; i < a.length; i++)
-           System.out.println(a[i].toString()); 
+        Term a = new Term("a", 1);
+        Term b = new Term("b", 2);
+        Term c = new Term("c", 3);
+        Term d = new Term("d", 4);
+        Term e = new Term("d", 4);
+        Term f = new Term("d", 4);
+        Term g = new Term("e", 5);        
+ 
+        Term[] arr = {a, b, c, d, e, f, g};
     }
 }
