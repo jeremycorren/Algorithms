@@ -20,23 +20,24 @@ public class Autocomplete {
     public Term[] allMatches(String prefix) {
         if(prefix == null)
             throw new NullPointerException("Prefix is null");
-         
+//        Term[] matches =                             
     }
 
-/*
     public int numberOfMatches(String prefix) {
         if(prefix == null)
             throw new NullPointerException("Prefix is null");
+        int last = BinarySearch.lastIndexOf(a, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+        int first = BinarySearch.firstIndexOf(a, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+        return last - first + 1;
     }
-*/
+
     public void print() {
         Sort.show(a);   
     }                   
 
     public static void main(String[] args) {
-        Term[] arr = {new Term("d", 0), new Term("a", 0), new Term("c", 0), new Term("b", 0)};
-        Autocomplete a = new Autocomplete(arr);       
-        a.print(); 
+        Term[] arr = {new Term("david", 0), new Term("daniel", 0), new Term("dana", 0), new Term("dietrich", 0)};
+        Autocomplete c = new Autocomplete(arr);       
+        System.out.println(c.numberOfMatches("da"));
     }
-
 }
