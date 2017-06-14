@@ -6,6 +6,7 @@ public class Autocomplete {
     public Autocomplete(Term[] terms) {
         if(terms == null || !checkNull(terms))  
             throw new NullPointerException("Input array null or array items are null");
+
         this.a = terms;
         Merge.sort(a);
     }
@@ -20,24 +21,45 @@ public class Autocomplete {
     public Term[] allMatches(String prefix) {
         if(prefix == null)
             throw new NullPointerException("Prefix is null");
-//        Term[] matches =                             
+
+        int num = numberOfMatches(prefix);
+        Term[] matches = new Term[num];
+        int first = first(a, prefix);
+        int last = last(a, prefix);
+
+        for(int i = first, k = 0; i <= last; i++, k++)
+            matches[k] = a[i];
+        Merge.sort(matches, Term.byReverseWeightOrder());            
+        return matches;
     }
 
     public int numberOfMatches(String prefix) {
         if(prefix == null)
             throw new NullPointerException("Prefix is null");
-        int last = BinarySearch.lastIndexOf(a, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
-        int first = BinarySearch.firstIndexOf(a, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+
+        int first = first(a, prefix);
+        int last = last(a, prefix);
         return last - first + 1;
     }
+
+    private int first(Term[] a, String prefix) {
+        return BinarySearch.firstIndexOf(a, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+    }
+
+    private int last(Term[] a, String prefix) {
+        return BinarySearch.lastIndexOf(a, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+    } 
 
     public void print() {
         Sort.show(a);   
     }                   
 
     public static void main(String[] args) {
-        Term[] arr = {new Term("david", 0), new Term("daniel", 0), new Term("dana", 0), new Term("dietrich", 0)};
+        Term[] arr = {new Term("david", 3), new Term("daniel", 1), new Term("dana", 2), new Term("eric", 0), new Term("haley", 0)};
         Autocomplete c = new Autocomplete(arr);       
-        System.out.println(c.numberOfMatches("da"));
+        c.print();
+        Term[] m = c.allMatches("da");
+        for(int i = 0; i < m.length; i++)
+            System.out.println(m[i]);
     }
 }

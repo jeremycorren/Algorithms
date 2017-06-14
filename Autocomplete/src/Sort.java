@@ -5,6 +5,10 @@ public class Sort {
         return v.compareTo(w) < 0;
     }
 
+    public static boolean less(Object v, Object w, Comparator c) {
+        return c.compare(v, w) < 0;
+    }
+
     public static void exch(Comparable[] a, int i, int j) {
         Comparable t = a[i];
         a[i] = a[j];
