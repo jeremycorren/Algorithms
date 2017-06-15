@@ -1,3 +1,5 @@
+import java.io.*;
+import java.util.*;
 import java.lang.*;
 
 public class Autocomplete {
@@ -55,11 +57,35 @@ public class Autocomplete {
     }                   
 
     public static void main(String[] args) {
-        Term[] arr = {new Term("david", 3), new Term("daniel", 1), new Term("dana", 2), new Term("eric", 0), new Term("haley", 0)};
-        Autocomplete c = new Autocomplete(arr);       
-        c.print();
-        Term[] m = c.allMatches("da");
-        for(int i = 0; i < m.length; i++)
-            System.out.println(m[i]);
+
+        File f = new File(args[0]);
+        Scanner in = null;
+        try {
+            in = new Scanner(f);
+        } catch(FileNotFoundException e) {
+            System.out.println(e);
+        }
+
+        int n = in.nextInt();
+        Term[] terms = new Term[n];
+        for(int i = 0; i < terms.length; i++) {   
+            long weight = in.nextLong();
+            String q = in.nextLine();
+            String query = q.trim();
+            terms[i] = new Term(query, weight);    
+        }     
+        in.close();
+
+        Scanner user = new Scanner(System.in);        
+        int k = Integer.parseInt(args[1]);
+        Autocomplete autocomplete = new Autocomplete(terms);
+        while (user.hasNextLine()) {
+            String prefix = user.nextLine();
+            Term[] results = autocomplete.allMatches(prefix);
+            for (int i = 0; i < Math.min(k, results.length); i++)
+                System.out.println(results[i]);
+        } 
+        user.close();
+
     }
 }

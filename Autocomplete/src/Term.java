@@ -39,8 +39,16 @@ public class Term implements Comparable<Term> {
         }
     
         public int compare(Term v, Term w) {
-            String a = v.query.substring(0,r);
-            String b = w.query.substring(0,r);
+            String a = "", b = "";
+            if(v.query.length() < r)
+                a = v.query;
+            else
+                a = v.query.substring(0, r);
+ 
+            if(w.query.length() < r)
+                b = w.query;
+            else
+                b = w.query.substring(0, r);
             return a.compareTo(b);    
         }
     }
@@ -52,18 +60,6 @@ public class Term implements Comparable<Term> {
     }
 
     public String toString() {
-        return weight + "\t" + query;
-    }
-
-    public static void main(String[] args) {
-        Term a = new Term("a", 1);
-        Term b = new Term("b", 2);
-        Term c = new Term("c", 3);
-        Term d = new Term("d", 4);
-        Term e = new Term("d", 4);
-        Term f = new Term("d", 4);
-        Term g = new Term("e", 5);        
- 
-        Term[] arr = {a, b, c, d, e, f, g};
+        return this.weight + "\t" + this.query;
     }
 }
