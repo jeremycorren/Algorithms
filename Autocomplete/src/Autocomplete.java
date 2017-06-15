@@ -52,18 +52,13 @@ public class Autocomplete {
         return BinarySearch.lastIndexOf(a, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
     } 
 
-    public void print() {
-        Sort.show(a);   
-    }                   
-
     public static void main(String[] args) {
-
         File f = new File(args[0]);
         Scanner in = null;
         try {
             in = new Scanner(f);
         } catch(FileNotFoundException e) {
-            System.out.println(e);
+            System.err.println("FileNotFoundException: " + e.getMessage());
         }
 
         int n = in.nextInt();
@@ -86,6 +81,5 @@ public class Autocomplete {
                 System.out.println(results[i]);
         } 
         user.close();
-
     }
 }

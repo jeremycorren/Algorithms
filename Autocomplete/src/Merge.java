@@ -48,10 +48,4 @@ public class Merge extends Sort {
             }
         }
     }
-
-    public static void main(String[] args) {
-        Integer[] a = {5, 3, 4, 1, 2};
-        sort(a);
-        show(a);
-    }
 }

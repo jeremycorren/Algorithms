@@ -6,11 +6,12 @@ public class BinarySearch {
             throw new NullPointerException("Argument is null");
         if(a.length == 0)
             return -1;
+        if(c.compare(a[0], key) == 0)
+            return 0;
+
         int result = -1;
         int lo = 0;                             
         int hi = a.length - 1;                  
-        if(c.compare(a[0], key) == 0)
-            return 0;
         while(lo <= hi) {
             int mid = lo + (hi - lo) / 2;
             if(c.compare(key, a[mid]) == 0) {
@@ -29,11 +30,12 @@ public class BinarySearch {
             throw new NullPointerException("Argument is null");           
         if(a.length == 0)
             return -1;
+        if(c.compare(a[a.length - 1], key) == 0)
+            return a.length - 1;
+        
         int result = -1;
         int lo = 0;                             
         int hi = a.length - 1;                  
-        if(c.compare(a[hi], key) == 0)
-            return hi;
         while(lo <= hi) {                       
             int mid = lo + (hi - lo) / 2;       
             if(c.compare(key, a[mid]) == 0) {
@@ -45,9 +47,5 @@ public class BinarySearch {
                 lo = mid + 1;
         }                                       
         return result;                              
-    }
-
-    public static void main(String[] args) {
-         
     }
 }
